@@ -8,6 +8,10 @@ class CprKit:
 		self.img = img_obj
 		self.exif = img_obj.info.get('exif')
 		self.save_quality = 80
+		self.icc_profile = None
+		if 'icc_profile' in img_obj.info:
+			self.icc_profile = img_obj.info.get('icc_profile')
+		self.isGrayscale = False
 
 	def arg_parse(self, parameters):
 	## All supported args:
@@ -31,6 +35,7 @@ class CprKit:
 
 	def toGrayscale(self):
 		self.img = self.img.convert('L')
+		self.isGrayscale = True
 
 	def resize(self, max_len_limit):
 		self.img.thumbnail((max_len_limit, max_len_limit))
@@ -40,4 +45,14 @@ class CprKit:
 		self.img.thumbnail((max_edge * ratio, max_edge * ratio))
 
 	def save(self, fpath):
-		self.img.save(fpath, quality=self.save_quality, exif=self.exif)
+		#print(self.exif)
+		if self.exif != None:
+			if self.isGrayscale == False:
+				if self.icc_profile != None:
+					self.img.save(fpath, quality=self.save_quality, exif=self.exif, icc_profile=self.icc_profile)
+				else:
+					self.img.save(fpath, quality=self.save_quality, exif=self.exif)
+			else:
+				self.img.save(fpath, quality=self.save_quality, exif=self.exif)
+		else:
+			self.img.save(fpath, quality=self.save_quality)
