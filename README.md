@@ -10,12 +10,12 @@ Nothig to say, so easy.
 ### CLI mode
 You can compress images with CLI prompt by run it directly:
 ```shell
-hpc-tui
+hpc-cli
 ```
 
 or use parameters:  
 ```shell
-hpc-tui <src_dir> <des_dir> <params>
+hpc-cli <src_dir> <des_dir> <params>
 ```
 
 #### Parameters
@@ -27,6 +27,6 @@ hpc-tui <src_dir> <des_dir> <params>
 
 For example:  
 ```shell
-hpc-tui /home/xxx/src /home/xxx/des -q=90 -sratio=0.5
+hpc-cli /home/xxx/src /home/xxx/des -q=90 -sratio=0.5
 # The images in /home/xxx/src will be 0.5x resized, and saved in /home/xxx/des with quality 90.
 ```
