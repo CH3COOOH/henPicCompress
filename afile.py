@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # <-- AZLIBRARY PROJECT (Python2, 3) -->
 # Started: 2018.02.02
-# Latest: 2024.02.11
+# Latest: 2025.05.03
 
 import os
 
@@ -58,3 +58,17 @@ def classifiedFileLst(folder, filter_=None):
 		else:
 			csf[folder] = [fname]
 	return csf
+
+# --- EXAMPLE ---
+# <INPUT>
+# filename_extend('a.txt', '_000', isEnd=True)
+# <OUTPUT>
+# 'a_000.txt'
+# ---------------
+def filename_extend(fname_origin, str_extend, isEnd=True):
+	fname, ext = os.path.splitext(fname_origin)
+	if isEnd:
+		fname = fname + str_extend
+	else:
+		fname = str_extend + fname
+	return fname + ext
